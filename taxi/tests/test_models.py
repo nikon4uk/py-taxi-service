@@ -48,7 +48,7 @@ class ManufacturerModelTest(TestCase):
 
         self.assertEquals(MANUFACTURER_COUNTRY_MAX_LENGTH, max_length)
 
-    def test_manufacturer_ordering(self):
+    def test_manufacturer_ordering_by_name(self):
         manufacturer = Manufacturer.objects.get(id=1)
 
         ordering = manufacturer._meta.ordering
@@ -98,7 +98,7 @@ class CarModelTest(TestCase):
 
         self.assertEqual("cars", related_name)
 
-    def test_car_ordering(self):
+    def test_car_ordering_by_model(self):
         car = Car.objects.get(id=1)
 
         ordering = car._meta.ordering
@@ -148,6 +148,12 @@ class DriverModelTest(TestCase):
         unique = driver._meta.get_field("license_number").unique
 
         self.assertTrue(unique)
+
+    def test_ordering_by_username(self):
+        driver = get_user_model()
+
+        ordering = driver._meta.ordering
+        self.assertEqual("username", ordering[0])
 
     def test_verbose_name_and_verbose_name_plural(self):
         driver = get_user_model()

@@ -46,7 +46,7 @@ class PrivateManufacturerTest(TestCase):
         self.assertTrue(response.context["is_paginated"])
         self.assertTrue(len(response.context["manufacturer_list"]) == 2)
 
-    def test_list_all_manufacturer_is_displayed(self):
+    def test_all_manufacturers_is_displayed(self):
         # Get second page and confirm it has (exactly) remaining 1 items
         response = self.client.get(MANUFACTURER_LIST_VIEW_URL + "?page=2")
 
@@ -76,6 +76,7 @@ class PrivateManufacturerTest(TestCase):
 
         response = self.client.post(MANUFACTURER_CREATE_VIEW_URL, data=form_data)
 
+        self.assertTrue(response.status_code, 302)
         self.assertRedirects(response, MANUFACTURER_LIST_VIEW_URL)
 
         new_manufacturer = Manufacturer.objects.get(name=form_data["name"])
