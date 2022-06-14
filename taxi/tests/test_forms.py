@@ -40,7 +40,8 @@ class DriverLicenseUpdateFormTest(TestCase):
         expected_error_message = "Enter correct value like AAA00000"
 
         form_with_invalid_data = DriverLicenseUpdateForm(data=invalid_license_data)
-        form_error_message = form_with_invalid_data.errors.as_data().get("license_number")[0].message
+        form_errors_as_data = form_with_invalid_data.errors.as_data()
+        form_error_message = form_errors_as_data.get("license_number")[0].message
 
         self.assertFalse(form_with_invalid_data.is_valid())
         self.assertTrue(form_with_invalid_data.errors)
@@ -58,8 +59,3 @@ class DriverLicenseUpdateFormTest(TestCase):
 
         self.assertFalse(form_with_invalid_data.is_valid())
         self.assertNotEqual(form_with_invalid_data.cleaned_data, invalid_license_data)
-
-
-class CarSearchFormTest(TestCase):
-    def test_max_field_length_is_thirty(self):
-        pass

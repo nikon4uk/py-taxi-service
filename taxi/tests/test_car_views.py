@@ -31,8 +31,8 @@ class PrivateCarTest(TestCase):
         self.client.force_login(self.user)
 
         test_manufacturer = Manufacturer.objects.create(
-            name=f"Manufacturer",
-            country=f"Country"
+            name="Manufacturer",
+            country="Country"
         )
 
         number_of_cars = 3
