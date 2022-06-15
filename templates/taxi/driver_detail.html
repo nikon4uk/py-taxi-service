@@ -7,22 +7,28 @@
 
   <p><strong>First name:</strong> {{ driver.first_name }}</p>
   <p><strong>Last name:</strong> {{ driver.last_name }}</p>
+
   <p>
       <strong>License number:</strong> {{ driver.license_number }}
-    <a class="update-link" href="{% url 'taxi:driver-license-update' pk=driver.pk %}">Update</a>
+      <a class="update-link" href="{% url 'taxi:driver-license-update' pk=driver.pk %}">Update</a>
   </p>
 
-  <p><strong>Is staff:</strong> {{ driver.is_staff }}</p>
-    <a class="btn btn-outline-danger" href="{% url 'taxi:driver-delete' pk=driver.pk%}">Delete user</a>
+  <p>
+      <strong>Is staff:</strong> {{ driver.is_staff }}
+      <br>
+      <a class="btn btn-outline-danger" href="{% url 'taxi:driver-delete' pk=driver.pk%}">Delete user</a>
+  </p>
+
 
   <div class="ml-3">
-    <h4>Cars</h4>
+    <h2>Cars</h2>
 
     {% for car in driver.cars.all %}
         <hr>
+        <p class="text-muted"><strong>ID:</strong><a href="{% url 'taxi:car-detail' pk=car.pk %}">{{car.id}}</a></p>
         <p><strong>Model:</strong> {{ car.model }}</p>
         <p><strong>Manufacturer:</strong> {{ car.manufacturer.name }}</p>
-        <p class="text-muted"><strong>Id:</strong> {{car.id}}</p>
+
 
     {% empty %}
       <p>No cars!</p>

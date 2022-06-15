@@ -14,14 +14,31 @@
             <input value="Search" type="submit" class="btn btn-secondary">
         </label>
     </form><br>
-    <ul>
-      {% for car in car_list %}
-        <li>
-          <a href="{% url "taxi:car-detail" pk=car.id %} ">{{ car.id }}</a>
-          {{ car.model }} ({{ car.manufacturer.name }})
-        </li>
-      {% endfor %}
-    </ul>
+    <table class="table">
+        <thead class="table-secondary">
+            <tr>
+                <th>ID</th>
+                <th>Model</th>
+                <th>Manufacturer</th>
+                <th>Country</th>
+                <th>Drivers</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for car in car_list %}
+                <tr>
+                    <td><a href="{% url "taxi:car-detail" pk=car.pk %}">{{ car.id }}</a></td>
+                    <td> {{ car.model }}</td>
+                    <td> {{ car.manufacturer.name }}</td>
+                    <td> {{ car.manufacturer.country }}</td>
+                    <td> {{ car.drivers.count }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+
+
+    </table>
+
   {% else %}
     <p>There are no cars in taxi</p>
   {% endif %}
